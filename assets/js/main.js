@@ -13,21 +13,54 @@ function createElement(htmlElement, className, innerContent) {
     return element;
 }
 
-// function to select all elements of the same class and adding a click event
-function showColour(element) {
-    const buttonSelect = document.querySelectorAll(element);
+function showColour(element, cellNumber) {
+    const buttonSelect = document.querySelectorAll(element); // slelects all game cells
 
-    buttonSelect.forEach(element => {
-        element.addEventListener("click", () => {
-                element.classList.toggle("blue");
-                console.log(element.innerText);
+    let bombList = [];
+    // Generates a random number and pushes it in bombList
+    while (bombList.length < 16) {
+        let numGen = randomGenerator(cellNumber);
+
+        if (bombList.includes(numGen) === true) {
+            continue;
+        } else {
+            bombList.push(numGen);
+        }
+    }
+
+    console.log(bombList); // list of bomb generated
+
+    // Loop to check where are the bombs with event related when you click to find out
+    for (let i = 0; i < buttonSelect.length; i++) {
+        let innerContent = buttonSelect[i].innerText;
+
+        if (bombList.includes(Number(innerContent))) {
+            buttonSelect[i].addEventListener("click", showBomb, true) 
+            function showBomb() {
+                buttonSelect[i].classList.add("bomb");
+                console.log(innerContent);
+                // if (showBomb === true) {
+                //     buttonSelect.removeEventListener("click", showBomb, true);
+                // }
+        }} else {
+            buttonSelect[i].addEventListener("click", () => {
+                buttonSelect[i].classList.add("blue");
+                console.log(innerContent);
             })
-        })
-};
+        }  
+    } 
+}
+
 
 // Reset function
 function resetGame() {
     ctnBoard.innerHTML= "";
+}
+
+// Generates a random number based on cellNumber
+function randomGenerator(cellNumber) {
+    const randomNum = Math.floor((Math.random() * cellNumber) + 1);
+    return randomNum;
 }
 
 // function to create the game board
@@ -37,7 +70,7 @@ function createBoard (cellNumber) {
             createdElement.classList.add("cell-"+`${cellNumber}`)
             ctnBoard.append(createdElement);
     }
-    showColour(".game-cell");
+    showColour(".game-cell", cellNumber);
 }
 
 function campoMinato() {
@@ -63,7 +96,6 @@ function campoMinato() {
             cellNumber = 100;
             break;
     }
-
     createBoard(cellNumber);
 }
 
@@ -77,3 +109,16 @@ const resetBtn = document.querySelector(".reset"); // selects play button
 
 playBtn.addEventListener('click', campoMinato); // starts game
 resetBtn.addEventListener("click", resetGame); // resets game
+
+
+
+/*************
+ * LOGICA
+ *************/
+
+// Superbonus 1
+
+// Quando si clicca su una bomba e finisce la partita, evitare che si possa cliccare su altre celle.
+// Superbonus 2
+
+// Quando si clicca su una bomba e finisce la partita, il software scopre tutte le bombe nascoste.
