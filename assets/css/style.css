@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Roboto', sans-serif;
+}
+
+/********** COMMON ***********/
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.show {
+    display: flex;
+}
+
+.blue {
+    background-color: blue;
+    color: white;
+}
+
+header, footer {
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+button, select {
+    cursor: pointer;
+}
+
+
+/****** HEADER *******/
+
+header > .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: headerFadeIn .55s ease-in forwards;
+}
+
+@keyframes headerFadeIn {
+    0% {
+        transform: translateY(-10%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+
+header .logo-title {
+    display: flex;
+    align-items: center;
+}
+
+header img {
+    width: 50px;
+    margin-right: 8px;
+}
+
+header .game-options {
+    display: flex;
+}
+
+header .mode,
+header button:last-child {
+    margin: 0 8px;
+}
+
+header button, select {
+    padding: 4px 8px;
+    width: 90px;
+    background-color: antiquewhite;
+    border: 0;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+/****** MAIN *******/
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    background-color: #7fffd4;
+}
+
+.game-board {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 600px;
+    width: 100%;
+    height: 600px;
+}
+
+.game-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000;
+    cursor: pointer;
+}
+
+.cell-100 {
+    width: calc(100% / 10);
+    height: calc(100% / 10);
+}
+
+.cell-81 {
+    width: calc(100% / 9);
+    height: calc(100% / 9);
+}
+
+.cell-49 {
+    width: calc(100% / 7);
+    height: calc(100% / 7);
+}
+
+
+/****** FOOTER *******/
+
+
